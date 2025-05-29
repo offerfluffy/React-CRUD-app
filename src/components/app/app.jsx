@@ -1,4 +1,5 @@
 import { Component } from "react";
+import nextId from "react-id-generator";
 
 import AppFilter from "../app-filter/app-filter";
 import AppInfo from "../app-info/app-info";
@@ -13,10 +14,10 @@ class App extends Component {
     super(props);
     this.state = {
       data: [
-        { name: "John C", salary: 800, increase: true, id: 1 },
-        { name: "Mary K", salary: 1000, increase: false, id: 2 },
-        { name: "Kevin P", salary: 1200, increase: false, id: 3 },
-        { name: "Peter P", salary: 1000, increase: true, id: 4 },
+        { name: "John C", salary: 800, id: nextId() },
+        { name: "Mary K", salary: 1000, id: nextId() },
+        { name: "Kevin P", salary: 1200, id: nextId() },
+        { name: "Peter P", salary: 1000, id: nextId() },
       ],
     };
   }
@@ -25,6 +26,15 @@ class App extends Component {
     this.setState(({ data }) => {
       return {
         data: data.filter((item) => item.id !== id),
+      };
+    });
+  };
+
+  addItem = (name, salary) => {
+    this.setState(({ data }) => {
+      const newData = [...data, { name: name, salary: salary, id: nextId() }];
+      return {
+        data: newData,
       };
     });
   };
@@ -42,7 +52,7 @@ class App extends Component {
         </div>
 
         <EmpolyeesList data={data} onDelete={this.deleteItem} />
-        <EmployeesAddForm />
+        <EmployeesAddForm onSubmit={this.addItem} />
       </div>
     );
   }

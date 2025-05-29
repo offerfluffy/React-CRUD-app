@@ -16,7 +16,7 @@ class EmployeesAddForm extends Component {
   // Example:
   // - If input has name="name" → this.setState({ name: ... })
   // - If input has name="salary" → this.setState({ salary: ... })
-  
+
   onValueChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
@@ -24,13 +24,21 @@ class EmployeesAddForm extends Component {
   };
 
   render() {
+    const { onSubmit } = this.props;
     const { name, salary } = this.state;
 
     return (
       <div className="app-add-form">
         <h3>Add new employee</h3>
 
-        <form className="add-form d-flex">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            onSubmit(name, salary);
+            this.setState({ name: "", salary: "" });
+          }}
+          className="add-form d-flex"
+        >
           {/* ✅ CONTROLLED COMPONENTS:
               - In React, inputs are either controlled or uncontrolled.
               - A **controlled input** means its value is tied to state (via value={...}).
