@@ -41,6 +41,7 @@
 .list-group-item .fa-star {
   width: 35px;
   height: 35px;
+  margin-left: 25px;
   line-height: 35px;
   font-size: 16px;
   color: #ffd700;
