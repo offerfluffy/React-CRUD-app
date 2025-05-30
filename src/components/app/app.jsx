@@ -126,27 +126,26 @@ class App extends Component {
     }));
   };
 
-  searchEmp = (items, term, filter) => {
+  searchEmp = (items, term) => {
+    if (term.length === 0) {
+      return items;
+    }
+
+    return items.filter((item) => {
+      return item.name.indexOf(term) > -1;
+    });
+  };
+
+  filterData = (items, filter) => {
     switch (filter) {
       case "rise": {
-        return items.filter((item) => {
-          return item.name.indexOf(term) > -1 && item.rise;
-        });
+        return items.filter((item) => item.rise);
       }
       case "salary": {
-        return items.filter((item) => {
-          return item.name.indexOf(term) > -1 && +item.salary > 1000;
-        });
+        return items.filter((item) => +item.salary > 1000);
       }
-      default: {
-        if (term.length === 0) {
-          return items;
-        }
-
-        return items.filter((item) => {
-          return item.name.indexOf(term) > -1;
-        });
-      }
+      default:
+        return items;
     }
   };
 
@@ -160,7 +159,7 @@ class App extends Component {
 
   render() {
     const { data, term, filter } = this.state;
-    const visibleData = this.searchEmp(data, term, filter);
+    const visibleData = this.filterData(this.searchEmp(data, term), filter);
 
     return (
       <div className="app">
