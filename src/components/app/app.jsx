@@ -77,7 +77,7 @@ class App extends Component {
       };
     });
   };
-
+  
   // onToggleIncrease = (id) => {
   //   // Hardest Way
   //   // this.setState(({ data }) => {
@@ -186,8 +186,6 @@ class App extends Component {
           onDelete={this.deleteItem}
           onToggleProp={this.onToggleProp}
           onUpdateSalary={this.onUpdateSalary}
-          // onToggleIncrease={this.onToggleIncrease}
-          // onToggleRise={this.onToggleRise}
         />
         <EmployeesAddForm onSubmit={this.addItem} />
       </div>
