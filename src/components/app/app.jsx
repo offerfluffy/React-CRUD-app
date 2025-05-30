@@ -126,6 +126,17 @@ class App extends Component {
     }));
   };
 
+  onUpdateSalary = (id, salary) => {
+    this.setState(({ data }) => ({
+      data: data.map((item) => {
+        if (item.id === id) {
+          return { ...item, salary: salary };
+        }
+        return item;
+      }),
+    }));
+  };
+
   onUpdateSearch = (term) => {
     this.setState({ term });
   };
@@ -174,6 +185,7 @@ class App extends Component {
           data={visibleData}
           onDelete={this.deleteItem}
           onToggleProp={this.onToggleProp}
+          onUpdateSalary={this.onUpdateSalary}
           // onToggleIncrease={this.onToggleIncrease}
           // onToggleRise={this.onToggleRise}
         />
