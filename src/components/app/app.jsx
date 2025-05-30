@@ -9,6 +9,10 @@ import SearchPanel from "../search-panel/search-panel";
 
 import "./app.css";
 
+// ✅ Controlled Inputs: Inputs tied to component state for full React control
+// ✅ Lifting State Up: Move shared state to a parent, pass data/functions via props
+// ✅ Dynamic Filtering: Use search term + filter condition to return filtered list
+// ✅ Generic Toggle: Use [prop] to toggle any boolean field on objects (DRY principle)
 class App extends Component {
   constructor(props) {
     super(props);
@@ -131,7 +135,7 @@ class App extends Component {
       }
       case "salary": {
         return items.filter((item) => {
-          return item.name.indexOf(term) > -1 && item.salary > 1000;
+          return item.name.indexOf(term) > -1 && +item.salary > 1000;
         });
       }
       default: {
