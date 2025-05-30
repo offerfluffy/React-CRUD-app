@@ -34,8 +34,10 @@ class EmployeesAddForm extends Component {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            onSubmit(name, salary);
-            this.setState({ name: "", salary: "" });
+            if (name !== "" && salary !== "") {
+              onSubmit(name, salary);
+              this.setState({ name: "", salary: "" });
+            }
           }}
           className="add-form d-flex"
         >
