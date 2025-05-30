@@ -126,6 +126,10 @@ class App extends Component {
     }));
   };
 
+  onUpdateSearch = (term) => {
+    this.setState({ term });
+  };
+
   searchEmp = (items, term) => {
     if (term.length === 0) {
       return items;
@@ -149,10 +153,6 @@ class App extends Component {
     }
   };
 
-  onUpdateSearch = (term) => {
-    this.setState({ term });
-  };
-
   onUpdateFilter = (filter) => {
     this.setState({ filter });
   };
@@ -167,7 +167,7 @@ class App extends Component {
 
         <div className="search-panel">
           <SearchPanel onUpdateSearch={this.onUpdateSearch} />
-          <AppFilter onUpdateFilter={this.onUpdateFilter} />
+          <AppFilter onUpdateFilter={this.onUpdateFilter} filter={filter} />
         </div>
 
         <EmpolyeesList

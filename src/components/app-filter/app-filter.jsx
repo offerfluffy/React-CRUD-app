@@ -1,56 +1,30 @@
-import { Component } from "react";
 import "./app-filter.css";
 
-class AppFilter extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      filter: "all",
-    };
-  }
-
-  onUpdateFilter = (e) => {
-    const filter = e.currentTarget.getAttribute("data-filter");
-    this.setState({ filter });
-    this.props.onUpdateFilter(filter);
+const AppFilter = ({ onUpdateFilter, filter }) => {
+  const setStyle = (elem) => {
+    return `btn ${elem === filter ? "btn-light" : "btn-outline-light"}`;
   };
 
-  setStyle = (elem) => {
-    return `btn ${
-      elem === this.state.filter ? "btn-light" : "btn-outline-light"
-    }`;
-  };
+  const buttonData = [
+    { name: "all", label: "All employees" },
+    { name: "rise", label: "Promotion" },
+    { name: "salary", label: "Salary bigger than 1000$" },
+  ];
 
-  render() {
-    return (
-      <div className="btn-group">
+  return (
+    <div className="btn-group">
+      {buttonData.map(({ name, label }) => (
         <button
-          onClick={this.onUpdateFilter}
+          key={name}
           type="button"
-          data-filter="all"
-          className={this.setStyle("all")}
+          className={setStyle(name)}
+          onClick={() => onUpdateFilter(name)}
         >
-          All empolyees
+          {label}
         </button>
-        <button
-          onClick={this.onUpdateFilter}
-          type="button"
-          data-filter="rise"
-          className={this.setStyle("rise")}
-        >
-          Promotion
-        </button>
-        <button
-          onClick={this.onUpdateFilter}
-          type="button"
-          data-filter="salary"
-          className={this.setStyle("salary")}
-        >
-          Salary bigger than 1000$
-        </button>
-      </div>
-    );
-  }
-}
+      ))}
+    </div>
+  );
+};
 
 export default AppFilter;
